@@ -9,11 +9,12 @@
 
     <TextView
         android:id="@+id/tvAgregarPokemon"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:gravity="center"
         android:text="Agregar pokemón"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
     <EditText
@@ -21,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:hint="Nombre del pokemón" />
 
     <EditText
         android:id="@+id/etNumber"

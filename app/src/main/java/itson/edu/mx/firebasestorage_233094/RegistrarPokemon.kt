@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -12,12 +13,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.cloudinary.android.MediaManager
+import com.cloudinary.android.callback.ErrorInfo
+import com.cloudinary.android.callback.UploadCallback
 
 class RegistrarPokemon : AppCompatActivity() {
     val REQUEST_IMAGE_GET = 1
     val CLOUD_NAME = "dvksecnll"
-    val UPLOAD_PRESET = "Pokemones"
+    val UPLOAD_PRESET = "pokemon_upload"
     var imageUri: Uri? = null
+    var imagePublicUrl: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +59,7 @@ class RegistrarPokemon : AppCompatActivity() {
             val fullPhotoUrl: Uri? = data?.data
             if (fullPhotoUrl != null) {
                 changeImage(fullPhotoUrl)
+                imageUri = fullPhotoUrl
             }
         }
     }
@@ -78,6 +83,27 @@ class RegistrarPokemon : AppCompatActivity() {
         if (imageUri != null) {
             val requesId = MediaManager.get().upload(imageUri)
                 .unsigned(UPLOAD_PRESET)
+                .callback(object: UploadCallback {
+                    override fun onStart(requestId: String?) {
+
+                    }
+
+                    override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
+
+                    }
+
+                    override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
+                        imagePublicUrl = resultData?.get("url") as String
+                    }
+
+                    override fun onError(requestId: String?, error: ErrorInfo?) {
+                        Log.e("onError", error.toString())
+                    }
+
+                    override fun onReschedule(requestId: String?, error: ErrorInfo?) {
+
+                    }
+                })
                 .dispatch()
 
             return requesId
