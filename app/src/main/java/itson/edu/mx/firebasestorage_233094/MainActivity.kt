@@ -1,6 +1,8 @@
 package itson.edu.mx.firebasestorage_233094
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,6 +19,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val btnRegister: Button = findViewById(R.id.btn_registrar)
 
+        btnRegister.setOnClickListener {
+            val intent = Intent(this, RegistrarPokemon::class.java)
+            startActivity(intent)
+        }
     }
 }
