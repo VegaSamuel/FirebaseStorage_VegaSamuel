@@ -12,6 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:gravity="center"
         android:text="Mi pokedex"
@@ -31,7 +32,8 @@
         android:id="@+id/btn_registrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrar pokemón"
-        />
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp"
+        android:text="Registrar pokemón" />
 
 </LinearLayout>
