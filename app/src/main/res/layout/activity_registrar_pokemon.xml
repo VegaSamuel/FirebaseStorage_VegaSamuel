@@ -26,12 +26,12 @@
         android:hint="Nombre del pokemón" />
 
     <EditText
-        android:id="@+id/etNumber"
+        android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="46dp"
-        android:hint="Número pokemón" />
+        android:hint="Descripción pokemón" />
 
     <ImageView
         android:id="@+id/thumbnail"

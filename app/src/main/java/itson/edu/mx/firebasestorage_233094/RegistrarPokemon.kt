@@ -15,8 +15,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
+import com.google.firebase.database.FirebaseDatabase
 
 class RegistrarPokemon : AppCompatActivity() {
+    private val userRef = FirebaseDatabase.getInstance().getReference("Pokemones")
     val REQUEST_IMAGE_GET = 1
     val CLOUD_NAME = "dvksecnll"
     val UPLOAD_PRESET = "pokemon_upload"
@@ -36,7 +38,7 @@ class RegistrarPokemon : AppCompatActivity() {
         initCloudinary()
 
         val name: EditText = findViewById(R.id.etName)
-        val number: EditText = findViewById(R.id.etNumber)
+        val description: EditText = findViewById(R.id.etDescription)
         val upload: Button = findViewById(R.id.btnUpload)
         val save: Button = findViewById(R.id.btnSavePokemon)
         val thumbail: ImageView = findViewById(R.id.thumbnail)
@@ -49,6 +51,11 @@ class RegistrarPokemon : AppCompatActivity() {
 
         save.setOnClickListener {
             savePokemon()
+            savePokemonToDatabase(
+                name.text.toString(),
+                description.text.toString(),
+                imagePublicUrl
+            )
         }
     }
 
@@ -77,6 +84,11 @@ class RegistrarPokemon : AppCompatActivity() {
         }catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    fun savePokemonToDatabase(name: String, description: String, imageUrl: String) {
+        val pokemon = Pokemon(name, description, imageUrl)
+        userRef.push().setValue(pokemon)
     }
 
     fun savePokemon(): String {
